@@ -9,7 +9,7 @@ const User = require('../models/user.model');
 /* GET - retrieves all the users from the database */
 router.get('/users', (req, res) => {
 	User.find()
-		.populate('rides') // we use populate to show the comments data associated with the rides.
+		// .populate('rides') // we use populate to show the comments data associated with the rides.
 		.then((allTheUsers) => {
 			res.status(200).json(allTheUsers);
 		})
@@ -18,7 +18,7 @@ router.get('/users', (req, res) => {
 		});
 });
 
-/* GET route => to get a specific project/detailed view */
+/* GET route => to get a specific ride/detailed view */
 router.get('/user/:id', (req, res) => {
 	const { id } = req.params;
 
@@ -32,8 +32,8 @@ router.get('/user/:id', (req, res) => {
 	// Our rides have array of comments' ids and
 	// we can use .populate() method to get the whole comment objects
 	User.findById(id)
-		.populate("rides")
-		.populate("comments")
+		.populate("rides") //TODO add to profile page.
+		.populate("comments") //TODO 
 		.then((user) => {
 			res.status(200).json(user);
 		})
@@ -63,7 +63,7 @@ router.put('/users/:id', (req, res) => {
 		});
 });
 
-// DELETE route => to delete a specific project
+// DELETE route => to delete a specific ride
 router.delete('/users/:id', (req, res) => {
 	const { id } = req.params;
 

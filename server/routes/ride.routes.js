@@ -5,7 +5,13 @@ const router = Router();
 const Ride = require('../models/ride.model');
 //const Comment = require("./comment.model");
 
-/* POST - creates a new project */
+// Create a ride
+// Get a specific ride
+// Update specific ride
+// Delete ride
+// 
+
+/* POST - creates a new ride */
 router.post('/rides', (req, res) => {
 	const { title, description,  imageUrl, meetingTime, startLocation , endLocation, rideLength, ridePace } = req.body;
 
@@ -18,9 +24,7 @@ router.post('/rides', (req, res) => {
 		endLocation,
 		rideLength,
 		ridePace,
-		/* comments: [],
-		publisher: req.user._id, //?? This ensures only ride publisher is able to edit / delete a given ride
-		participant: [] //TODO This field is reserved for ride participants. */
+		publisher: req.user_id
 	})
 		.then((response) => {
 			res.status(200).json(response);
@@ -33,7 +37,7 @@ router.post('/rides', (req, res) => {
 		});
 });
 
-/* GET - retrieves all the projects from the database */
+/* GET - retrieves all the rides from the database */
 router.get('/rides', (req, res) => {
 	Ride.find()
 		.populate('comments') // we use populate to show the comments data associated with the rides.
@@ -45,7 +49,7 @@ router.get('/rides', (req, res) => {
 		});
 });
 
-/* GET route => to get a specific project/detailed view */
+/* GET route => to get a specific rides/detailed view */
 router.get('/rides/:id', (req, res) => {
 	const { id } = req.params;
 
@@ -89,7 +93,7 @@ router.put('/rides/:id', (req, res) => {
 		});
 });
 
-// DELETE route => to delete a specific project
+// DELETE route => to delete a specific ride
 router.delete('/rides/:id', (req, res) => {
 	const { id } = req.params;
 
