@@ -79,6 +79,7 @@ app.use('/api', require("./routes/ride.routes"));
 app.use('/api', require("./routes/comment.routes"));
 app.use('/api', require("./routes/auth.routes"));
 app.use("/api", require("./routes/fileUpload.routes"));
+app.use("/api", require("./routes/user.routes"));
 
 
 module.exports = app;
