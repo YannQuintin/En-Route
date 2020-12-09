@@ -10,6 +10,7 @@ const User = require('../models/user.model');
 router.get('/users', (req, res) => {
 	User.find()
 		.populate('rides') // we use populate to show the comments data associated with the rides.
+		// .populate('comments')
 		.then((allTheUsers) => {
 			res.status(200).json(allTheUsers);
 		})
