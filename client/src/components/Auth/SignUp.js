@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AuthService from '../../Services/auth.services';
+import { useHistory } from 'react-router-dom';
 
 const initialState = { username: '', password: '' }; //?? allows for the Hook to pass the state
 
@@ -42,19 +43,22 @@ export default function SignIn(props) {
 
   const service = new AuthService();
 
+  const history = useHistory();
+
     // Form submission handler
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
 
 		const { username, password } = regForm; //??Getting these from the state
+    
 
 		// Use the service.signup method to make a call to the back end and sign the user up
 		service //?? sending the username & password from State using the service 'signup'
 			.signup(username, password)
 			.then((response) => {
 				setRegForm(initialState);
-                props.getUser(response); //?? Not entirely sure what is happening here
-				// props.history.push('/rides')
+        props.getUser(response); //?? Not entirely sure what is happening here
+        history.push('/rides')
 				console.log("SIGN UP RESPONSE", response);
 			})
 			.catch((error) => {
@@ -111,6 +115,7 @@ export default function SignIn(props) {
           /> */}
           <Button
             type="submit"
+            value="Signup"
             fullWidth
             variant="contained"
             color="primary"

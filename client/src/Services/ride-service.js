@@ -8,6 +8,8 @@ class RideService {
     });
   }
 
+  /* process.env.REACT_APP_BASE_URL */
+
   // Create a Ride
   createRide = (data) => {
     return this.service

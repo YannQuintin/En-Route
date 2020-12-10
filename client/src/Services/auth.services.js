@@ -13,28 +13,28 @@ class AuthService {
 	/* SignUp method  */
 	signup = (username, password) => {
         return this.service
-        .post('/signup', { username, password })
+        .post('/api/signup', { username, password })
         .then((response) => response.data);
 	};
 
 	/* Login method  */
 	login = (username, password) => {
         return this.service
-        .post('/login', { username, password })
+        .post('/api/login', { username, password })
         .then((response) => response.data);
 	};
 
 	/* Check if user is authenticated method */
 	isAuthenticated = () => {
         return this.service
-        .get('/loggedin')
+        .get('/api/loggedin')
         .then((response) => response.data);
 	};
 
 	/* Logout method  */
 	logout = () => {
         return this.service
-        .post('/logout', {})
+        .post('/api/logout', {})
         .then((response) => response.data);
 	};
 }

@@ -4,7 +4,7 @@ const router = Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 
-// require the user model !!!!
+
 const User = require("../models/user.model");
 
 
