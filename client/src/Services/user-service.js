@@ -11,25 +11,25 @@ class UserService {
 
   // Method to retrieve all user
   getUsers = () => {
-    return this.service.get("/users").then((response) => response);
+    return this.service.get("/api/users").then((response) => response);
   };
 
   // Method to retrieve a user
   getOneUser = (id) => {
-    return this.service.get(`/user/${id}`).then((response) => response);
+    return this.service.get(`/api/user/${id}`).then((response) => response);
   };
 
   // Method to update a user
   updateUser = (id, data) => {
     return this.service
-      .put(`/users/${id}`, data)
+      .put(`/api/users/${id}`, data)
       .then((response) => response);
   };
 
   // Method to delete a user
   removeUser = (id) => {
     return this.service
-      .delete(`/users/${id}`)
+      .delete(`/api/users/${id}`)
       .then((response) => response);
   };
 }

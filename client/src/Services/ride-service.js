@@ -13,31 +13,31 @@ class RideService {
   // Create a Ride
   createRide = (data) => {
     return this.service
-      .post("/rides", data)
+      .post("/api/rides", data)
       .then((response) => response);
   };
 
   // Method to retrieve all ride
   getRides = () => {
-    return this.service.get("/rides").then((response) => response);
+    return this.service.get("/api/rides").then((response) => response);
   };
 
   // Method to retrieve a ride
   getOneRide = (id) => {
-    return this.service.get(`/rides/${id}`).then((response) => response);
+    return this.service.get(`/api/rides/${id}`).then((response) => response);
   };
 
   // Method to update a ride
   updateRide = (id, data) => {
     return this.service
-      .put(`/rides/${id}`, data)
+      .put(`/api/rides/${id}`, data)
       .then((response) => response);
   };
 
   // Method to delete a ride
   removeRide = (id) => {
     return this.service
-      .delete(`/rides/${id}`)
+      .delete(`/api/rides/${id}`)
       .then((response) => response);
   };
 }
