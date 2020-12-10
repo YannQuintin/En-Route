@@ -83,10 +83,19 @@ if (process.env.NODE_ENV === 'production') {
 	// static files include all javascript and css files
 	app.use(express.static('client/build'));
 
+	app.get('*', function (req, res) {
+		const index = path.join(__dirname, 'build', 'index.html');
+		res.sendFile(index);
+	  });
+
 	// get the index.html that will be rendered on the browser
-	app.get('*', (req, res) => {
+/* 	app.get('*', (req, res) => {
 		res.sendFile(path.join(__dirname + '../client', 'build', 'index.html'));
-	});
+	}); */
 }
+
+
+
+
 
 module.exports = app;
