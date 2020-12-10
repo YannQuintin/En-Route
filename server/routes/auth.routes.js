@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 
 /* SIGNUP ROUTE */
-router.post("/signup", (req, res) => {
+router.post("/api/signup", (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -149,7 +149,7 @@ router.post("/signup", (req, res) => {
 }); */
 
 /* LOGIN ROUTE */
-router.post("/login", (req, res, next) => {
+router.post("/api/login", (req, res, next) => {
   passport.authenticate("local", (err, theUser, failureDetails) => {
     if (err) {
       res
@@ -181,7 +181,7 @@ router.post("/login", (req, res, next) => {
 });
 
 /* LOGOUT ROUTE */
-router.post("/logout", (req, res) => {
+router.post("/api/logout", (req, res) => {
   // req.logout() is defined by passport
   req.logout();
   res.status(200).json({ message: "Log out success!" });
@@ -190,7 +190,7 @@ router.post("/logout", (req, res) => {
 /* LOGGEDIN */
 //?? This allows us to do a sanity check on whether a user is loggedin
 //?? Based on this route we can do conditional rendering
-router.get("/loggedin", (req, res) => {
+router.get("/api/loggedin", (req, res) => {
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
     return;
