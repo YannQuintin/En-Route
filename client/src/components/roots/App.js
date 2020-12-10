@@ -66,12 +66,13 @@ function App() {
           render={() => <Login getUser={getLoggedInUser} />}
         />
         <Route
+          exact
           user={loggedInUser}
           path="/"
           render={() => <Home getUser={getLoggedInUser} />}
         />
         <Route
-          
+          exact
           user={loggedInUser}
           path="/about"
           render={() => <About getUser={getLoggedInUser} />}
@@ -81,7 +82,8 @@ function App() {
           path="/adventures"
           render={() => <Adventures getUser={getLoggedInUser} />}
         />
-        <Route
+        <ProtectedRoute
+          exact
           user={loggedInUser}
           path="/rides/:id"
           component={RideDetails}
@@ -90,9 +92,9 @@ function App() {
           exact
           user={loggedInUser}
           path="/rides"
-          render={() => <RideList getUser={getLoggedInUser} />}
+          render={() => <RideList getUser={getLoggedInUser}/>}
         />
-        <Route
+        <ProtectedRoute
           user={loggedInUser}
           path="/users"
           render={() => <UserList getUser={getLoggedInUser} />}
@@ -105,9 +107,8 @@ function App() {
       </Switch>
       <Footer/>
     </section>
-  ) 
-  
-}
+  );
+};
 export default App;
 
 

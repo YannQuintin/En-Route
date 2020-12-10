@@ -30,7 +30,7 @@ const UsersList = () => {
 				{listOfUsers.map((user) => {
 					return (
 						<div key={user._id}>
-							<Link to={`/users/${user._id}`}>
+							<Link to={`/user/${user._id}`}>
 								<h3>{user.username}</h3>
 							</Link>
 							<p>{user.description}</p>

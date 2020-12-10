@@ -1,22 +1,51 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AuthService from "../../Services/auth.services";
-import './Auth.css';
+import React, { useState }from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import AuthService from '../../Services/auth.services';
 
-const initialState = { username: "", password: "" };
+const initialState = { username: '', password: '' }; //?? allows for the Hook to pass the state
 
-const Login = (props) => {
-  const [loginState, setLoginState] = useState(initialState);
-  const [loginErrorMsg, setLoginErrorMsg] = useState("");
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+export default function Login(props) {
+  const classes = useStyles();
+  const [ loginState, setLoginState ] = useState(initialState);
+  const [regErrorMsg, setRegErrorMsg ] = useState("");
 
   const service = new AuthService();
 
-  // Function to handle form submit in the input fields
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+    // Form submission handler
+	const handleFormSubmit = (event) => {
+		event.preventDefault();
 
-    const { username, password } = loginState;
-
+		const { username, password } = loginState;
+		// Use the service.signup method to make a call to the back end and sign the user up
     service
       .login(username, password)
       .then((response) => {
@@ -25,10 +54,10 @@ const Login = (props) => {
       })
       .catch((error) => {
         const { message } = error.response.data;
-        setLoginErrorMsg(message);
+        setRegErrorMsg(message);
         console.log(error);
       });
-  };
+	};
 
   // Function to handle changes in the input fields
   const handleChange = (event) => {
@@ -37,65 +66,71 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={loginState.username}
-          onChange={handleChange}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={loginState.password}
-          onChange={handleChange}
-        />
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            value={loginState.username}
+            type="username"
+            label="User Name"
+            name="username"
+            autoComplete="email"
+            autoFocus
+            onChange={handleChange}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            name="password"
+            id="password"
+            autoComplete="current-password"
+            value={loginState.password}
+            onChange={handleChange}
 
-        <input type="submit" value="Login" />
-      </form>
-      <br />
-
-      {loginErrorMsg && <span style={{ color: "red" }}>{loginErrorMsg}</span>}
-
-      <p>
-        Don't have account yet?
-        <Link to={"/signup"}>Signup</Link>
-      </p>
-
-      <div className="base-container">
-        <div className="header">Register</div>
-        <div className="content">
-          <div className="image">
-            {/* <img src={loginImg} /> */}
-          </div>
-          <div className="form">
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input type="text" name="username" placeholder="username" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="text" name="email" placeholder="email" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input type="text" name="password" placeholder="password" />
-            </div>
-          </div>
-        </div>
-        <div className="footer">
-          <button type="button" className="btn">
-            Register
-          </button>
-        </div>
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Let's Ride!
+          </Button>
+          <br />
+			{regErrorMsg && <span style={{ color: 'red' }}>{regErrorMsg}</span>}
+          <Grid container>
+            <Grid item xs>
+              <Link href="/" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+            
+              <Link href="/signup" variant="body2">
+              {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
       </div>
 
-
-    </div>
+    </Container>
   );
-};
-
-export default Login;
+}

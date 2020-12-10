@@ -10,6 +10,7 @@ const EditRideForm = (props) => {
 		title: props.theRide.title,
 		description: props.theRide.description,
 		imageUrl: props.theRide.imageUrl,
+		meetingDate: props.theRide.meetingDate,
 		meetingTime: props.theRide.meetingTime,
 		startLocation: props.theRide.startLocation,
 		endLocation: props.theRide.endLocation,
@@ -21,7 +22,7 @@ const EditRideForm = (props) => {
 
 	//?? Function handler to submit form
 	const handleFormSubmit = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		const service = new RideService();
 
@@ -30,6 +31,7 @@ const EditRideForm = (props) => {
 			title,
 			description,
 			imageUrl,
+			meetingDate,
 			meetingTime,
 			startLocation,
 			endLocation,
@@ -42,6 +44,7 @@ const EditRideForm = (props) => {
 		  title,
 		  description,
 		  imageUrl,
+		  meetingDate, 
 		  meetingTime,
 		  startLocation,
 		  endLocation,
@@ -64,7 +67,7 @@ const EditRideForm = (props) => {
 		setFormState({ ...formState, [name]: value });
 	};
 
-	// Function to uploading a file
+	/* // Function to uploading a file
 	const handleFileUpload = (event) => {
 		// Creates a new FormData object that will take the file upload data
 		const uploadData = new FormData();
@@ -82,7 +85,7 @@ const EditRideForm = (props) => {
 			.catch((err) => {
 				console.log('Error while hadnling the  image file upload: ', err);
 			});
-	};
+	}; */
 
 	return (
 		<div>
@@ -95,6 +98,9 @@ const EditRideForm = (props) => {
 				<label htmlFor="description">Description:</label>
 				<textarea name="description" value={formState.description} onChange={handleInputChange} />
 				<input type="submit" value="Submit" />
+				<br />
+				<label htmlFor="meetingDate">Meeting date:</label>
+				<input name="meetingDate" value={formState.meetingDate} onChange={handleInputChange} />
 				<br />
 				<label htmlFor="meetingTime">Meeting time:</label>
 				<input name="meetingTime" value={formState.meetingTime} onChange={handleInputChange} />
@@ -116,17 +122,18 @@ const EditRideForm = (props) => {
 					placeholder="e.g. Easy Peasy - 28km/h"
 				/>
 				<br />
-				<label htmlFor="imageUrl">Ride's map:</label>
+{/* 				<label htmlFor="imageUrl">Ride's map:</label>
 				<input type="file" name="imageUrl" onChange={handleFileUpload} />
-				<br />
+				<br /> */}
+				<button type="submit">Submit</button>
 				{/* this logic allows us disable the Submit button until file is uploaded. */}
-				{formState.imageUrl ? (
+	{/* 			{formState.imageUrl ? (
 					<button type="submit">Submit</button>
 				) : (
 					<button disabled type="submit">
 						Submit
 					</button>
-				)}
+				)} */}
 			</form>
 		</div>
 	);

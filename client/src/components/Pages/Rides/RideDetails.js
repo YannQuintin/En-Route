@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import a xios from 'a xios';
 import { Link } from 'react-router-dom';
 
 import EditRideForm from './Forms/EditRideForm';
 import AddCommentForm from '../../Comments/Form/AddCommentForm';
 import RideService from '../../../Services/ride-service';
-
-//TODO Update the a xios calls using RideService
 
 //TODO
 // get a single ride
@@ -16,7 +13,7 @@ import RideService from '../../../Services/ride-service';
 // if user is ride publisher, allow to edit / delete
 
 const RideDetails = (props) => {
-	const [ details, setDetails ] = useState({});
+	const [ details, setDetails ] = useState([]);
 
 	// function to make api call to the backend to retrieve a single object from the database
 	const getSingleRide = () => {
@@ -82,6 +79,7 @@ const RideDetails = (props) => {
 	};
 
 	const publisherCheck = (ride) => {
+		console.log(ride);
 		if (props.loggedInUser && ride.publisher === props.loggedInUser._id) {
 			return (
 				<div>
@@ -101,6 +99,7 @@ const RideDetails = (props) => {
 			<h1>{details.title}</h1>
 			<img src={details.imageUrl} alt="ride-route" />
 			<p>{details.description}</p>
+			<p>{details.meetingDate} </p>
 			<p>{details.meetingTime} </p>
 			<p>{details.startLocation} </p>
 			<p>{details.endLocation} </p>
@@ -109,6 +108,11 @@ const RideDetails = (props) => {
 
 			{publisherCheck(details)}
 			<br />
+
+			<div>{renderEditForm()} </div>
+			<br />
+			<br />
+			<button onClick={() => deleteRide(details._id)}>Delete ride</button>
 
 			{/* <div>{renderEditForm()}</div> */}
 			<div>{renderAddCommentForm()} </div>
@@ -164,6 +168,15 @@ Delete a single ride A xios call
 				props.history.push('/rides');
 			})
 			.catch((error) => console.error(error));
+
+FROM PROFILE DETAILS
+
+			<Link to="/rides">See all rides</Link>
+			<br />
+			<br />
+			<br />
+			<Link to="/rides">Add a ride</Link>
+			<p>HERE PUT CARDS OF RIDES FROM USER</p>
 
 
 */

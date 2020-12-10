@@ -30,7 +30,7 @@ const EditRideForm = (props) => {
 
 		axios
 			.put(
-				`http://localhost:5000/api/users/${props.theUser._id}`, //?? Looking for specific values to update ==> re-using the props deconstruction
+				`http://localhost:5000/api/user/${props.theUser._id}`, //?? Looking for specific values to update ==> re-using the props deconstruction
 				{
 					username,
 					password, //TODO going to need to call passport to change that one

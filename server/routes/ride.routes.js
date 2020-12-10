@@ -13,12 +13,13 @@ const Ride = require('../models/ride.model');
 
 /* POST - creates a new ride */
 router.post('/rides', (req, res) => {
-	const { title, description,  imageUrl, meetingTime, startLocation , endLocation, rideLength, ridePace } = req.body;
+	const { title, description,  imageUrl, meetingDate, meetingTime, startLocation , endLocation, rideLength, ridePace } = req.body;
 
 	Ride.create({
 		title,
 		description,
 		imageUrl,
+		meetingDate,
 		meetingTime,
 		startLocation,
 		endLocation,

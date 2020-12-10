@@ -54,12 +54,11 @@ export default function SignIn(props) {
 			.then((response) => {
 				setRegForm(initialState);
                 props.getUser(response); //?? Not entirely sure what is happening here
-				// props.history.push('/rides')
-				console.log("SIGN UP RESPONSE", response);
+                console.log("SIGN UP RESPONSE", response);
 			})
 			.catch((error) => {
                 console.log(error.response)
-				const { message } = error.response;
+				const { message } = error.response.data;
 				setRegErrorMsg(message);
 			});
 	};
@@ -78,7 +77,7 @@ export default function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
           <TextField
@@ -87,8 +86,8 @@ export default function SignIn(props) {
             required
             fullWidth
             id="email"
-            label="User Name"
-            name="username"
+            label="Email Address"
+            name="email"
             autoComplete="email"
             autoFocus
             onChange={handleChange}
@@ -116,20 +115,19 @@ export default function SignIn(props) {
             color="primary"
             className={classes.submit}
           >
-            Let's Ride!
+            Sign In
           </Button>
           <br />
 			{regErrorMsg && <span style={{ color: 'red' }}>{regErrorMsg}</span>}
           <Grid container>
             <Grid item xs>
-              <Link href="/" variant="body2">
+              <Link href="#" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-			
-              <Link href="/login" variant="body2">
-                {"Already a member? Login"}
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

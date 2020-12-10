@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import a xios from 'a xios';
 import { Link } from 'react-router-dom';
 
 import EditProfileForm from './Forms/EditProfileForm';
@@ -17,8 +16,6 @@ const ProfileDetails = (props) => {
 	const getSingleUser = () => {
 		//?? get the 'id' from url via 'props.match.params' object
 		const { id } = props.match.params;
-
-		 //TODO Finish service implementation
 
 		const service = new UserService();
 
@@ -38,14 +35,14 @@ const ProfileDetails = (props) => {
 	const renderEditForm = () => {
 		// Check if there is some value in the details state
 		if (!details.username) {
-			// run the api call if the state isn't filled
+			// run the service call if the state isn't filled
 			getSingleUser();
 		} else {
 			return (
 				<EditProfileForm //?? render the edit form
 					theUser={details} 
 					getTheUser={getSingleUser}
-					{...props} //?? pass down the ride, to use the history push to help us redirect to RideList
+					{...props} //?? pass down the user, to use the history push to help us redirect to RideList
 				/>
 			);
 		}
@@ -60,7 +57,7 @@ const ProfileDetails = (props) => {
 
 		// service method to the delete route in the backend
 		service
-			.removeRide(id)
+			.getUsers(id)
 			.then(() => {
 				// after submitting the form, 'props.history.push' can be used to redirect to 'home'
 				props.history.push('/');
@@ -69,7 +66,9 @@ const ProfileDetails = (props) => {
 	};
 
 	const ownershipCheck = (user) => {
-		if (props.loggedInUser === props.loggedInUser._id) {
+		console.log(user);
+		console.log(props);
+		if (props.loggedInUser && user.name === props.loggedInUser._id) {
 			return (
 				<div>
 					<div>{renderEditForm()} </div>

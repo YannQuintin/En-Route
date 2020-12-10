@@ -9,6 +9,7 @@ const User = require('../models/user.model');
 /* GET - retrieves all the users from the database */
 router.get('/users', (req, res) => {
 	User.find()
+		.populate('publisher')
 		.populate('rides') // we use populate to show the comments data associated with the rides.
 		// .populate('comments')
 		.then((allTheUsers) => {
@@ -33,6 +34,7 @@ router.get('/user/:id', (req, res) => {
 	// Our rides have array of comments' ids and
 	// we can use .populate() method to get the whole comment objects
 	User.findById(id)
+		.populate("publisher")
 		.populate("rides") //TODO add to profile page.
 		.populate("comments") //TODO 
 		.then((user) => {

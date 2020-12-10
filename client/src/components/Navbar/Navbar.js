@@ -76,7 +76,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-
+import ProtectedRoute from "./../Auth/ProtectedRoutes";
 import AuthService from '../../Services/auth.services';
 
 function Navbar(props) {
@@ -160,13 +160,14 @@ function Navbar(props) {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/user/:id' className='nav-links' onClick={closeMobileMenu}>
-                {<Button buttonStyle='btn--outline'><p>Welcome back <strong>{loggedInUser.username}</strong></p></Button>}
+              <Link to={`/user/${loggedInUser._id}`} className='nav-links' onClick={closeMobileMenu}>
+                <p>Hoi <strong>{loggedInUser.username} !</strong></p>
               </Link>
             </li>
+            
           </ul>
-{/*           {button && <Button buttonStyle='btn--outline'>Logout</Button>}
-           */}
+          {button && <Button onClick={logoutUser} buttonStyle='btn--outline'>Logout</Button>}
+          
         </div>
       </nav>
     </>
@@ -207,17 +208,16 @@ function Navbar(props) {
                     Rides
                   </Link>
                 </li>
-    
-                <li>
+                <li className='nav-item'>
                   <Link
-                    to='/login'
-                    className='nav-links-mobile'
+                    to="/login"
+                    className='nav-links'
                     onClick={closeMobileMenu}
-                  >  
+                  >
+                    Login
                   </Link>
                 </li>
               </ul>
-              <Link to="/login">{button && <Button buttonStyle='btn--outline'>Login</Button>}</Link>
             </div>
           </nav>
         </>
@@ -225,4 +225,14 @@ function Navbar(props) {
 }
 }
 
+
 export default Navbar;
+
+
+/* 
+User greeting
+              <Link to='/users/:id' className='nav-links' onClick={closeMobileMenu}>
+                {<Button buttonStyle='btn--outline'><p>Hoi <strong>{loggedInUser.username} !</strong></p></Button>}
+              </Link>
+
+*/
