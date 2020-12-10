@@ -10,32 +10,24 @@ class AuthService {
 		});
 	}
 
-	/* SignUp method  */
+	// Method to use in our SignUp component
 	signup = (username, password) => {
-        return this.service
-        .post('/api/signup', { username, password })
-        .then((response) => response.data);
+		return this.service.post('/api/signup', { username, password }).then((response) => response.data);
 	};
 
 	/* Login method  */
 	login = (username, password) => {
-        return this.service
-        .post('/api/login', { username, password })
-        .then((response) => response.data);
+		return this.service.post('/api/login', { username, password }).then((response) => response.data);
 	};
 
 	/* Check if user is authenticated method */
 	isAuthenticated = () => {
-        return this.service
-        .get('/api/loggedin')
-        .then((response) => response.data);
+		return this.service.get('/api/loggedin').then((response) => response.data);
 	};
 
 	/* Logout method  */
 	logout = () => {
-        return this.service
-        .post('/api/logout', {})
-        .then((response) => response.data);
+		return this.service.post('/api/logout', {}).then((response) => response.data);
 	};
 }
 

@@ -1,4 +1,77 @@
-import React, { useState }from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+import AuthService from "./../../Services/auth.services";
+
+const initialState = { username: "", password: "" };
+
+const Login = (props) => {
+  const [loginState, setLoginState] = useState(initialState);
+  const [loginErrorMsg, setLoginErrorMsg] = useState("");
+
+  const service = new AuthService();
+
+  // Function to handle form submit in the input fields
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const { username, password } = loginState;
+
+    service
+      .login(username, password)
+      .then((response) => {
+        setLoginState(initialState);
+        props.getUser(response);
+      })
+      .catch((error) => {
+        const { message } = error.response.data;
+        setLoginErrorMsg(message);
+        console.log(error);
+      });
+  };
+
+  // Function to handle changes in the input fields
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setLoginState({ ...loginState, [name]: value });
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleFormSubmit}>
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={loginState.username}
+          onChange={handleChange}
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={loginState.password}
+          onChange={handleChange}
+        />
+
+        <input type="submit" value="Login" />
+      </form>
+      <br />
+
+      {loginErrorMsg && <span style={{ color: "red" }}>{loginErrorMsg}</span>}
+
+      <p>
+        Don't have account?
+        <Link to={"/signup"}> Signup</Link>
+      </p>
+    </div>
+  );
+};
+
+export default Login;
+
+/* import React, { useState }from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -133,4 +206,4 @@ export default function Login(props) {
 
     </Container>
   );
-}
+} */
