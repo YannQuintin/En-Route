@@ -57,7 +57,7 @@ function App() {
       <Switch>
         <Route
           exact
-          path="/api/signup"
+          path="/signup"
           render={() => <Signup getUser={getLoggedInUser} />}
         />
         <Route
