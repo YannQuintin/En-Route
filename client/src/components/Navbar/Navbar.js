@@ -70,8 +70,6 @@ const Navbar = (props) => {
  */
 
 
-
- 
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';

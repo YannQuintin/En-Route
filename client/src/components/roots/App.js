@@ -51,7 +51,7 @@ function App() {
   //?? The function is run to check if the user is logged in.
   fetchUser();
 
-  return (
+ return (
     <section className="App">
       <Navbar userInSession={loggedInUser} getUser={getLoggedInUser} />
       <Switch>
@@ -108,10 +108,9 @@ function App() {
       <Footer/>
     </section>
   );
-};
+}; 
+
 export default App;
-
-
 /* 
 
 return loggedInUser ? (

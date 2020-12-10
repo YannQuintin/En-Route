@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import AuthService from "./../../Services/auth.services";
@@ -68,10 +68,10 @@ const Login = (props) => {
     </div>
   );
 };
+ */
 
-export default Login;
 
-/* import React, { useState }from 'react';
+import React, { useState }from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -83,6 +83,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AuthService from '../../Services/auth.services';
+import { useHistory } from 'react-router-dom';
 
 const initialState = { username: '', password: '' }; //?? allows for the Hook to pass the state
 
@@ -98,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -106,12 +107,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login(props) {
+const Login = (props) => {
   const classes = useStyles();
   const [ loginState, setLoginState ] = useState(initialState);
   const [regErrorMsg, setRegErrorMsg ] = useState("");
 
   const service = new AuthService();
+
+  const history = useHistory();
 
     // Form submission handler
 	const handleFormSubmit = (event) => {
@@ -124,6 +127,7 @@ export default function Login(props) {
       .then((response) => {
         setLoginState({ username: "", password: "" });
         props.getUser(response);
+        history.push('/rides')
       })
       .catch((error) => {
         const { message } = error.response.data;
@@ -206,4 +210,6 @@ export default function Login(props) {
 
     </Container>
   );
-} */
+}
+
+export default Login;
