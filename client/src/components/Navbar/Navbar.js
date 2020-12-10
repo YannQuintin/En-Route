@@ -76,7 +76,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import ProtectedRoute from "./../Auth/ProtectedRoutes";
+//import ProtectedRoute from "./../Auth/ProtectedRoutes";
 import AuthService from '../../Services/auth.services';
 
 function Navbar(props) {

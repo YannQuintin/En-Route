@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import a xios from 'a xios';
 import RideService from '../../../../Services/ride-service';
-import UploadService from '../../../../Services/upload-service';
+//import UploadService from '../../../../Services/upload-service';
 // import { Redirect } from 'react-router-dom';
 
 const EditRideForm = (props) => {
